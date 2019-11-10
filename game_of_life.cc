@@ -112,7 +112,7 @@ class GameOfLife {
         }
     }
 
-    int get_number_of_adj(const int i, const int j) {
+    int get_number_of_adj(const int i, const int j) const {
         int sum = 0;
         if (i > 0 && j > 0 && _table[i - 1][j - 1]) ++sum;
         if (i > 0 && _table[i - 1][j]) ++sum;
@@ -165,7 +165,7 @@ int main() {
     srand((int)time(0));
     struct winsize win;
     ioctl(STDOUT_FILENO, TIOCGWINSZ, &win);
-    int original_density = rand() % 100;
+    const int original_density = rand() % 100;
     GameOfLife game_of_life(win.ws_col - 2, win.ws_row - 5, original_density);
     cout << game_of_life << endl;
     this_thread::sleep_for(chrono::milliseconds(2000));
@@ -174,5 +174,4 @@ int main() {
         game_of_life.generation();
         this_thread::sleep_for(chrono::milliseconds(200));
     }
-    cout << game_of_life << endl;
 }
